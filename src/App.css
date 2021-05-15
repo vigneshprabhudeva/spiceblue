@@ -1,0 +1,197 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+body{
+  padding: 10px;
+
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+#addtask{
+  border: .5px solid #eeeeee;
+  width: 30%;
+  height:30px;
+  
+  
+  background:#f9f9fa;
+  box-shadow: 0px 0px 2px #888888;
+}
+span{
+ 
+ margin-top: 8px;
+ margin-left: 12px;
+
+
+}
+#addtask_button{
+  width: 10%;
+  height:30px;
+  float: right;
+  border: 1px solid #ADDFFF;
+}
+
+#taskid{
+  width: 97%;
+  margin-top: 5px;
+   box-shadow: 0px 0px 2px #888888;
+
+}
+#selectid{
+  width: 100%;
+   padding: 2px;
+   margin-top: 10px;
+   box-shadow: 0px 0px 2px #888888;
+}
+input{
+  padding: 2px;
+}
+label{
+
+}
+
+#cancel_button{
+    float: right;
+  
+    
+  border: none;
+
+  padding: 7.5px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 15px 2px;
+  cursor: pointer;
+}
+#save_button{
+    float: right;
+  ;
+    background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 7.5px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 15px 2px;
+  cursor: pointer;
+  border-radius: 3px;
+  width: 100px;
+}
+#time_input{
+  width: 45%;
+    float: right;
+     padding:5px; 
+    border:1px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px #888888;
+
+}
+#date_input{
+  width: 45%;
+   padding:5px; 
+    border:1px solid #ccc; 
+ 
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px #888888;
+
+}
+form{
+  padding: 10px;
+   border: 2px solid #eeeeee;
+   height: 300px;
+   margin-top: 13px;
+   background:#edf7fc;
+   border-bottom-right-radius:3px;
+   border-bottom-left-radius:3px;
+   box-shadow: 0px 0px 2px #888888;
+}
+input[type=text] {
+    padding:5px; 
+    border:1px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+select{
+   padding:5px; 
+    border:1px solid #ccc; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+#time_labe{
+  float: right;
+  margin-right: 38%;
+}
+#show{
+  border: 2px solid #eeeeee;
+  box-sizing:border-box;
+  
+
+  margin-top: 12px;
+}
+#date{
+  color: red;
+  font-size:11px;
+}
+
+#tick_button{
+  float: right;
+  margin-top: -40px
+}
+#del_button{
+    margin-top: 22px;
+
+}
+#create_button{
+   float: right;
+  margin-top: -40px;
+  margin-right: 30px;
+
+}
+#edit_button{
+  float: right;
+  margin-top: -40px;
+  margin-right: 60px;
+
+
+}
+#user_label{
+  margin-bottom: 20px
+
+}
