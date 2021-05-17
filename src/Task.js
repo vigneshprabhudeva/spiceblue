@@ -17,6 +17,7 @@ function Task(){
 	const profile=useSelector(state=>state.profile);
 	const editId=useSelector(state=>state.editId);
 	const count=useSelector(state=>state.count);
+	const formDate=useSelector(state=>state.formDate);
 	 let history = useHistory();
 
 	 useEffect(()=>{    
@@ -33,6 +34,7 @@ function Task(){
 
 		axios.get('https://stage.api.sloovi.com/user', { headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} })
 		.then((res)=>{
+			console.log(res.data)
 			dispatch({type:"profile",profile:res.data.results})
 		})
 
@@ -53,8 +55,17 @@ function Task(){
 		*/
 
 		e.preventDefault()
-		var d = new Date();
-        var seconds = (d.getTime(e.target.time.value))/1000;
+		let t=e.target.time.value
+		let newday=new Date()
+		console.log(Math.floor(newday.getTime()/1000))
+		let day=localStorage.getItem("formDate")
+		let seconds=day/1000
+		
+		
+		
+       
+        
+
        let Body ={
                 assigned_user:e.target.user.value, 
                 task_date:e.target.date.value,   
@@ -63,6 +74,7 @@ function Task(){
 		        time_zone:43200,
                 task_msg:e.target.task.value
                }
+               console.log(Body)
          axios.post('https://stage.api.sloovi.com/task/lead_58be137bfde045e7a0c8d107783c4598',Body, { headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`},
 		 })
 		.then((res)=>{
