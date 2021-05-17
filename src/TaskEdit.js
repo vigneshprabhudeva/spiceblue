@@ -3,23 +3,34 @@ import {useStore,useDispatch,useSelector} from 'react-redux'
 import {useState,useEffect} from 'react'
 import { BiTrash } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
-function TaskEdit({submit,setcount}){
+import DateFnsUtils from '@date-io/date-fns'; // choose your lib
+import {
+  DatePicker,
+  TimePicker,
+  DateTimePicker,
+  MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
+import axios from 'axios'
+function TaskEdit({update,setcount}){
+	const [selectedDate, handleDateChange] = useState(new Date());
 	 let history = useHistory();
 	let [Task,setTask]=useState("")
 	let [date,setDate]=useState("")
 	let [time,settime]=useState("")
 	let [user,setuser]=useState("")
-	const taskstore=useSelector(state=>state.task);
+	
+	const editTask=useSelector(state=>state.editTask);
+	const profile=useSelector(state=>state.profile);
+	console.log(editTask.task_time)
 	const dispatch=useDispatch()
 	useEffect(()=>{
-		setTask(taskstore.task)
-		setDate(taskstore.date)
-		settime(taskstore.time)
-		setuser(taskstore.user)
+		setTask(editTask.task_msg)
+		setDate(editTask.task_date)
+		settime(editTask.task_time)
+		setuser(editTask.user)
 
 	},[])
-	console.log(Task)
-	console.log(taskstore.date)
+	
 	function changeTask(event){
 		console.log(event.target.value)
 		setTask(event.target.value)
@@ -37,35 +48,47 @@ function TaskEdit({submit,setcount}){
 		setuser(event.target.value)
 	}
 	function del(){
-		setcount(0)
 		var result = window.confirm("Want to delete?");
         if (result) {
-        	dispatch({type:"delete",task:[]})
-		dispatch({type:"delete",count:0})
-		console.log(taskstore)
-		history.push("/");
-   
-             }
+        axios.delete('https://stage.api.sloovi.com/task/lead_58be137bfde045e7a0c8d107783c4598/'+localStorage.getItem("UserId"), { headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`},
+		 })
+		.then((res)=>{
+			console.log(res.data)
+			if (res.data.message=="Deleted successfully") {
+				dispatch({type:"count/decrease"})
 
-		
-	}
+				axios.get('https://stage.api.sloovi.com/task/lead_58be137bfde045e7a0c8d107783c4598', { headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`},
+		         })
+		        .then((res)=>{
+		     	console.log(res.data)
+			    dispatch({type:"save",task:res.data.results})
+		        })
+			}
+		})
+      
+		 }
+            history.push("/ShowTask");
+    }
 
 	
 	return(<div>
-		<form onSubmit={submit}>
+		<form onSubmit={update}>
 		<label id="task_label">Task Description</label>
 
 		<input type="text" name="task" value={Task} id="taskid" placeholder="Enter the task Description" onChange={changeTask}/><br/><br/>
 		<div id="date_time">
 		<label>Date</label><label id="time_labe" >Time</label><br/><br/>
-		<input type="date" value={date} onChange={changeDate}  name="date" id="date_input"/><input type="time" name="time" onChange={changeTime} id="time_input" value={time} placeholder="time"/><br/><br/>
+		<input type="date" value={date} onChange={changeDate}  name="date" id="date_input"/><MuiPickersUtilsProvider utils={DateFnsUtils}>
+        
+        <TimePicker id="time_pick" name="time"value={selectedDate} onChange={handleDateChange} />
+    
+        </MuiPickersUtilsProvider><br/><br/>
 		<label>Assign user</label><br/><br/>
 		</div>
 		<select id="selectid" name="user" value={user} onChange={changeUser}>
 		<option disabled selected value> -- select an option -- </option>
-		<option>userOne</option>
-		<option>userTwo</option>
-		<option>userThree</option>
+		<option value={profile.id}>{profile.name}</option>
+		
 		</select>
 		<button type="submit" id="save_button">edit</button><Link to="/showTask"><button type="button" id="cancel_button">cancel</button></Link><button type="button" id="del_button" onClick={del}><BiTrash/></button>
 		</form>

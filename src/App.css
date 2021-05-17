@@ -43,17 +43,21 @@ body{
 }
 #addtask{
   border: .5px solid #eeeeee;
-  width: 30%;
+  width: 322px;
   height:30px;
+  box-shadow: 2px 2px 2px #888888;
+  
   
   
   background:#f9f9fa;
-  box-shadow: 0px 0px 2px #888888;
+  
+  display: inline-block
 }
 span{
  
  margin-top: 8px;
  margin-left: 12px;
+ display: inline-block
 
 
 }
@@ -136,11 +140,13 @@ form{
   padding: 10px;
    border: 2px solid #eeeeee;
    height: 300px;
-   margin-top: 13px;
+   margin-top: 0px;
    background:#edf7fc;
    border-bottom-right-radius:3px;
    border-bottom-left-radius:3px;
-   box-shadow: 0px 0px 2px #888888;
+   box-shadow: 2px 2px 2px #888888;
+   display: inline-block;
+   width: 300px;
 }
 input[type=text] {
     padding:5px; 
@@ -163,7 +169,7 @@ select{
   box-sizing:border-box;
   
 
-  margin-top: 12px;
+  margin-top: 5px;
 }
 #date{
   color: red;
@@ -194,4 +200,10 @@ select{
 #user_label{
   margin-bottom: 20px
 
+}
+#time_pick{
+  width: 130px;
+  margin-left: 10px;
+  background:white;
+   box-shadow: 0px 0px 2px #888888;
 }
