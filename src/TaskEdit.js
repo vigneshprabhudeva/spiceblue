@@ -13,6 +13,7 @@ import {
 import axios from 'axios'
 function TaskEdit({update,setcount}){
 	const [selectedDate, handleDateChange] = useState(new Date());
+	localStorage.setItem("formDate",selectedDate.getTime())
 	 let history = useHistory();
 	let [Task,setTask]=useState("")
 	let [date,setDate]=useState("")
@@ -21,13 +22,15 @@ function TaskEdit({update,setcount}){
 	
 	const editTask=useSelector(state=>state.editTask);
 	const profile=useSelector(state=>state.profile);
+	const userAccepted=useSelector(state=>state.userAccepted);
 	console.log(editTask.task_time)
 	const dispatch=useDispatch()
 	useEffect(()=>{
 		setTask(editTask.task_msg)
 		setDate(editTask.task_date)
 		settime(editTask.task_time)
-		setuser(editTask.user)
+		setuser(editTask.assigned_user)
+		console.log(editTask)
 
 	},[])
 	
@@ -69,7 +72,7 @@ function TaskEdit({update,setcount}){
 		 }
             history.push("/ShowTask");
     }
-
+console.log(user)
 	
 	return(<div>
 		<form onSubmit={update}>
@@ -85,9 +88,14 @@ function TaskEdit({update,setcount}){
         </MuiPickersUtilsProvider><br/><br/>
 		<label>Assign user</label><br/><br/>
 		</div>
-		<select id="selectid" name="user" value={user} onChange={changeUser}>
+
+		<select id="selectid" name="user" value={user}  onChange={changeUser}>
 		<option disabled selected value> -- select an option -- </option>
-		<option value={profile.id}>{profile.name}</option>
+		{userAccepted.map(function(val){console.log(val.id)
+			return<option value={val.id}>{val.name} </option>
+
+
+		})}
 		
 		</select>
 		<button type="submit" id="save_button">edit</button><Link to="/showTask"><button type="button" id="cancel_button">cancel</button></Link><button type="button" id="del_button" onClick={del}><BiTrash/></button>

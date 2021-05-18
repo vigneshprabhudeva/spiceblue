@@ -46,6 +46,27 @@ function Task(){
 			dispatch({type:"count",count:res.data.results.length})
 		})
 
+
+
+
+		axios.get('https://stage.api.sloovi.com/team', { headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`},
+		         })
+		        .then((res)=>{
+		     	console.log(res.data.results)
+			    let UserAccepted=res.data.results.filter(function(val){
+			    	if (val.user_status=="accepted") {
+			    		return true
+			    	}else{
+			    		return false
+			    	}
+			    })
+			    console.log(UserAccepted)
+			    dispatch({type:"userAccepted",userAccepted:UserAccepted})
+		        })
+
+
+  
+
 	 },[])
 	 
 
@@ -117,8 +138,8 @@ function Task(){
     	/* in the TaskEdit component if the edit button is clicked
     	task is edited with a put request */
 		e.preventDefault()
-		var d = new Date();
-        var seconds = (d.getTime(e.target.time.value))/1000;
+		let day=localStorage.getItem("formDate")
+		let seconds=day/1000
 		let Body ={
                 assigned_user:e.target.user.value, 
                 task_date:e.target.date.value,   
@@ -179,6 +200,8 @@ function Task(){
            <ShowTask edit={edit}/>
           </Route>  
         </Switch>
+
+       
         </div>
 		
 		

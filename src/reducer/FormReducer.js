@@ -1,4 +1,4 @@
-let initialState={task:[],profile:[],editTask:[],editId:[],count:"0",formDate:""}
+let initialState={task:[],profile:[],editTask:[],editId:[],count:"0",formDate:"",userAccepted:[]}
 function FormReducer(state =initialState,action){
 	console.log(action)
 	console.log(initialState)
@@ -36,6 +36,10 @@ function FormReducer(state =initialState,action){
 		case 'formDate':
 		  console.log("formDate")
 		return{...state,count:action.formDate}
+
+		case 'userAccepted':
+		  console.log("formDate")
+		return{...state,userAccepted:action.userAccepted}
 
 		
 
